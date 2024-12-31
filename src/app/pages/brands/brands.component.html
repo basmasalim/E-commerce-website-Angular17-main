@@ -1,0 +1,29 @@
+<section class="mt-5 container mainbrand categories">
+  <h2 class="text-capitalize text-center text-main mb-4">
+    all Popular categories
+  </h2>
+  <h6 class="mt-2 mb-3 text-main">{{ brandsList.length }} categories found</h6>
+  <div class="row g-3">
+    @for (brand of brandsList; track $index) {
+    <div
+      class="col-xl-2 col-lg-3 col-md-4 col-sm-6"
+      [routerLink]="['/SpecificBrand', brand._id]"
+    >
+      <figcaption class="text-start ms-2 mb-1">
+        <span class="font-md text-main text-end w-100">{{ brand.name }} </span>
+      </figcaption>
+      <figure class="main-border cr overflow-hidden rounded-2">
+        <img
+          [src]="brand.image"
+          [alt]="brand.name"
+          [title]="brand.name"
+          loading="lazy"
+          height="250"
+          class="w-100"
+        />
+      </figure>
+    </div>
+
+    }
+  </div>
+</section>

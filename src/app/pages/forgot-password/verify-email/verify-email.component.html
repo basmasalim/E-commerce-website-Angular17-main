@@ -1,0 +1,64 @@
+<section class="forgot d-flex align-items-center">
+  <div class="container boxShadow py-5">
+    <div class="overflow-hidden py-5">
+      <div class="verifyEmail-form">
+        <h2 class="form-title fs-1 text-center">
+          Forgot <span class="fw-lighter">Your Password?</span>
+        </h2>
+        <form
+          class="verifyEmail-form w-50 mx-auto"
+          id="verifyEmail-form"
+          [formGroup]="verifyEmail"
+          (ngSubmit)="verifyEmailSubmit()"
+        >
+          <!-- Email -->
+          <div class="position-relative mb-2">
+            <label for="email" class="fs-6 fw-medium py-2 text-capitalize">
+              Email:
+            </label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              class="form-control shadow-none focus-ring-dark"
+              placeholder="Email"
+              formControlName="email"
+            />
+            <span class="position-absolute z-3 start-0 ms-3">
+              <i class="fa-regular fa-envelope fa-1"></i>
+            </span>
+          </div>
+          @if (verifyEmail.get('email')?.errors &&
+          verifyEmail.get('email')?.touched) {
+          <div class="alert alert-danger">
+            @if (verifyEmail.get('email')?.getError('required')) {
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              Email is required
+            </p>
+            }@if(verifyEmail.get('email')?.getError('email')){
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              Enter Valid Email
+            </p>
+            }
+          </div>
+          }
+
+          <!-- button -->
+          <div
+            class="d-flex justify-content-center align-items-center flex-column my-3"
+          >
+            <button class="btn-main" [disabled]="verifyEmail.invalid">
+              @if (isLoading) {
+              <i class="fa fa-spinner fa-spin"></i>
+              }
+              <span
+                >Reset Password
+                <i class="fa-solid fa-arrow-right ms-3"></i>
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

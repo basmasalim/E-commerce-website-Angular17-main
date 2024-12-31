@@ -1,0 +1,23 @@
+.badNum {
+  padding: 2px 3.5px;
+  font-size: 10px;
+  left: 35%;
+  top: 12%;
+}
+.cartNum {
+  top: 85%;
+  left: 2.5%;
+  transform: translateX(0%);
+  opacity: 1;
+}
+
+.purchase-info,
+.cartNum,
+.addRemoveItem {
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.addRemoveItem {
+  width: 70%;
+}

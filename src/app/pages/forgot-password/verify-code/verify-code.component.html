@@ -1,0 +1,55 @@
+<section class="forgot d-flex align-items-center">
+  <div class="container boxShadow py-5">
+    <div class="overflow-hidden py-5">
+      <div class="verifyCode-form">
+        <h2 class="form-title fs-1 text-center">Verify Your Email</h2>
+        <form
+          class="verifyCode-form w-50 mx-auto"
+          id="verifyCode-form"
+          [formGroup]="verifyCode"
+          (ngSubmit)="verifyCodeSubmit()"
+        >
+          <!-- resetCode -->
+          <div class="mb-2 position-relative">
+            <label for="resetCode" class="fs-6 fw-medium py-2 text-capitalize">
+              resetCode:
+            </label>
+            <input
+              id="resetCode"
+              type="text"
+              name="resetCode"
+              class="form-control shadow-none focus-ring-dark"
+              placeholder="Reset Code"
+              formControlName="resetCode"
+            />
+            <span class="position-absolute z-3 start-0 ms-3"
+              ><i class="fa-solid fa-barcode fa-1"></i
+            ></span>
+          </div>
+          @if (verifyCode.get('resetCode')?.errors &&
+          verifyCode.get('resetCode')?.touched) {
+          <div class="alert alert-danger">
+            @if (verifyCode.get('resetCode')?.getError('required')) {
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              resetCode is required
+            </p>
+            }
+          </div>
+          }
+
+          <!-- button -->
+          <div
+            class="d-flex justify-content-center align-items-center flex-column my-3"
+          >
+            <button class="btn-main" [disabled]="verifyCode.invalid">
+              @if (isLoading) {
+              <i class="fa fa-spinner fa-spin"></i>
+              }
+              <span>Verify Code </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

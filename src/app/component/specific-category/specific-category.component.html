@@ -1,0 +1,45 @@
+<!-- specific-category.component.html -->
+@if (specificCategory.image != undefined) {
+<section class="container px-4 rounded-5 boxShadow">
+  <div class="row">
+    <div class="col-xl-2 col-lg-3">
+      <figure>
+        <img
+          class="rounded-5"
+          [src]="specificCategory.image"
+          [alt]="specificCategory.name"
+          width="180"
+        />
+      </figure>
+    </div>
+    <div class="col-xl-10 col-lg-9">
+      <div class="info-categ d-flex flex-column justify-content-around h-100">
+        <div class="head">
+          <h1 class="text-capitalize fw-bold fs-5">Category Name:</h1>
+          <h3 class="text-capitalize mb-0 fw-medium text-main fs-6">
+            {{ specificCategory.name }}
+          </h3>
+        </div>
+        <div class="foot">
+          <h2 class="text-capitalize fw-medium mb-0 fs-5">date Products:</h2>
+          <h3 class="text-capitalize text-main fw-lighter fs-6">
+            {{ specificCategory.createdAt }}
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  @if ((productList | filterCategory : searchInput :
+  specificCategory.name).length > 0) {
+  <app-main-products
+    [productList]="
+      productList | filterCategory : searchInput : specificCategory.name
+    "
+    [stockStatuses]="StockStatusList"
+  ></app-main-products>
+  }@else {
+  <app-empty-page></app-empty-page>
+  }
+</section>
+}

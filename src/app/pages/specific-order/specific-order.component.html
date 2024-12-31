@@ -1,0 +1,152 @@
+<section class="container">
+  <div class="info-allordersUser mb-5 specific-orders rounded-3 p-5">
+    @if (allordersUser && allordersUser.user) {
+    <div class="row bg-light py-3 px-2 rounded-2">
+      <h2 class="text-capitalize text-main fs-4">
+        order id: <span class="text-muted"> #{{ allordersUser.id }}</span>
+      </h2>
+      <div class="col-lg-7 col-md-7">
+        <h4 class="fs-6">
+          your email :
+          <span class="text-muted">{{ allordersUser.user.email }}</span>
+        </h4>
+        <h4 class="text-capitalize fs-6">
+          your phone :
+          <span class="text-muted">{{ allordersUser.user.phone }}</span>
+        </h4>
+
+        <div class="isDelivered">
+          <h4 class="text-capitalize fs-6">
+            created At:
+            <span class="text-muted">
+              {{ allordersUser.createdAt | date }}
+            </span>
+          </h4>
+          <h4 class="text-capitalize fs-6">
+            isDelivered: @if (allordersUser.isDelivered) {
+            <i class="fa-solid fa-check text-main"></i>
+            } @if (!allordersUser.isDelivered) {
+
+            <i class="fa-solid fa-circle-xmark text-danger"></i>
+            }
+          </h4>
+        </div>
+        <div class="isPaid">
+          <h4 class="text-capitalize fs-6">
+            isPaid: @if (!allordersUser.isDelivered) {
+            <i class="fa-solid fa-circle-xmark text-danger"></i>
+            } @if (allordersUser.isDelivered) {
+
+            <i class="fa-solid fa-check text-main"></i>
+            }
+          </h4>
+        </div>
+        <h4 class="text-capitalize fs-6">
+          data:{{ allordersUser.paidAt | date }}
+        </h4>
+        <div class="payment text-capitalize">
+          <h4 class="fs-6">
+            payment Type @if (allordersUser.paymentMethodType === 'card') {
+            <i class="fa-brands fa-cc-visa fa-xl"></i>
+            } @if (allordersUser.paymentMethodType === 'cash') {
+            <i class="fa-solid fa-wallet fa-xl text-main"></i>
+            }
+          </h4>
+        </div>
+      </div>
+      <div class="col-lg-5 col-md-5">
+        <h4 class="text-capitalize fs-6">
+          shipping Price:
+          <span class="text-muted">{{ allordersUser.shippingPrice }}</span>
+        </h4>
+        <h4 class="text-capitalize fs-6">
+          tax Price:
+          <span class="text-muted"> {{ allordersUser.taxPrice }}</span>
+        </h4>
+        <hr />
+
+        <h4 class="text-capitalize fs-5">
+          total Price:
+          <span class="text-muted">
+            EGP {{ allordersUser.totalOrderPrice }}
+          </span>
+        </h4>
+      </div>
+    </div>
+    }
+  </div>
+
+  <div
+    class="row justify-content-between align-items-start flex-wrap text-start"
+  >
+    <div class="table-responsive">
+      <table class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th>item</th>
+            <th>Product</th>
+            <th>price</th>
+            <th>brand</th>
+            <th>count</th>
+            <th>category</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (order of allordersUser.cartItems; track $index) {
+          <tr class="p-3">
+            <th class="col-1">{{ $index + 1 }}</th>
+            <td class="col-2">
+              <figure
+                class="rounded-3 cr w-50 m-auto"
+                [routerLink]="['/details', order.product.id]"
+              >
+                <img
+                  class="w-100 rounded-4"
+                  [src]="order.product.imageCover"
+                  [alt]="order.product.title"
+                />
+              </figure>
+            </td>
+            <td class="col-3">
+              <h4 class="text-black text-capitalize fs-5 mt-5">
+                <span class="text-muted">
+                  {{ order.price }}
+                </span>
+              </h4>
+            </td>
+            <td class="col-2">
+              <figure
+                class="w-75 m-auto rounded-3"
+                [routerLink]="[
+                  '/specificBrand',
+                  order.product.brand._id,
+                  order.product.brand.name
+                ]"
+              >
+                <img
+                  class="w-100 rounded-4"
+                  [src]="order.product.brand.image"
+                  [alt]="order.product.brand.name"
+                />
+              </figure>
+            </td>
+            <td class="col-2">
+              <h4 class="text-black text-capitalize fs-5 mt-5">
+                <span class="text-muted">
+                  {{ order.count }}
+                </span>
+              </h4>
+            </td>
+
+            <td>
+              <h4 class="text-black text-capitalize fs-5 mt-5">
+                {{ order.product.category.name }}
+              </h4>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

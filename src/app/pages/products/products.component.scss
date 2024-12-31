@@ -1,0 +1,31 @@
+section {
+  margin-top: 8rem;
+}
+.switcher li {
+  padding: 10px 15px;
+  margin-inline: 10px;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+  background-color: #eee;
+  text-align: center;
+  border-radius: 5px;
+  transition: all 0.5s;
+}
+.switcher li.active,
+.switcher li:hover {
+  background-color: var(--main-color);
+  color: white;
+}
+input {
+  padding-left: 10px !important;
+}
+
+input:focus {
+  transform: translateY(0px);
+}
+
+.my-pagination ::ng-deep .ngx-pagination .current {
+  background: var(--main-color);
+  border-radius: 5px;
+}

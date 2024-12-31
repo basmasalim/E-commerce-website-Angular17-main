@@ -1,0 +1,11 @@
+<section class="container my-1">
+  <h2 class="text-uppercase">Wishlist</h2>
+  @if (wishlistData.length > 0) {
+  <app-main-products
+    [productList]="wishlistData"
+    [stockStatuses]="StockStatusList"
+  ></app-main-products>
+  }@else {
+  <app-empty-page></app-empty-page>
+  }
+</section>

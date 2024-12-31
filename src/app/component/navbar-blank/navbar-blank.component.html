@@ -1,0 +1,106 @@
+<nav
+  class="navbar navbar-expand-md position-fixed w-100 bg-white z-3"
+  [class.p-4]="!isScrolling"
+>
+  <div class="container">
+    <a class="navbar-brand" routerLink="/home">
+      <img src="assets/images/freshcart-logo.svg" alt="freshcart" />
+    </a>
+    <button
+      class="navbar-toggler border-0 shadow-none"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse my-2" id="navbarNav">
+      <!-- List Anchor -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a
+            class="nav-link text-capitalize font-md px-2"
+            aria-current="page"
+            routerLinkActive="active-link"
+            routerLink="/home"
+            >home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-capitalize font-md px-2"
+            routerLinkActive="active-link"
+            routerLink="/products"
+            >products</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-capitalize font-md px-2"
+            routerLinkActive="active-link"
+            routerLink="/categories"
+            >categories</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-capitalize font-md px-2"
+            routerLinkActive="active-link"
+            routerLink="/brands"
+            >brands</a
+          >
+        </li>
+      </ul>
+      <!-- List Alternate Icons In col-md -->
+      <ul class="navbar-nav ms-auto navIcon" role="button">
+        <li class="nav-item">
+          <a
+            class="nav-link position-relative"
+            aria-current="page"
+            routerLink="/favourite"
+          >
+            <i class="fa-regular fa-heart fa-l"></i>
+            <span class="badge bg-main position-absolute end-0">{{
+              wishNum
+            }}</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link position-relative"
+            aria-current="page"
+            routerLink="/cart"
+          >
+            <i class="fa-solid fa-cart-shopping fa-l"></i>
+            <span class="badge bg-main position-absolute end-0">{{
+              cartNum
+            }}</span>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <button
+            class="btn nav-link dropdown-toggle"
+            id="userDropdown"
+            aria-expanded="false"
+          >
+            <i class="fa-solid fa-user fa-1x"></i>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="userDropdown">
+            <li>
+              <a
+                class="dropdown-item text-capitalize fw-semibold active-link text-center"
+                aria-current="page"
+                (click)="_AuthService.logOut()"
+              >
+                signout
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,260 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&family=Karla:wght@200..800&family=Rubik:wght@300..900&display=swap");
+
+:root {
+  --main-color: #0aad0a;
+  --light-color: #f0f3f2;
+  --shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
+    rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
+    rgba(145, 158, 171, 0.12) 0px 1px 10px 0px;
+  --rating-color: #ffc908;
+  --border-color: #e3e3e3;
+}
+
+/* Stlye For Browser */
+::selection {
+  background-color: var(--main-color);
+  color: #ffffff;
+}
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+  border-radius: 30px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--light-color);
+}
+
+/*! Reset  */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  font-family: "Rubik", sans-serif !important;
+}
+
+.active-link {
+  background-color: var(--main-color) !important;
+  color: var(--light-color) !important;
+  border-radius: 5px;
+}
+
+.rating-color {
+  color: var(--rating-color);
+}
+.cr {
+  cursor: pointer;
+}
+a,
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+.font-sm {
+  font-size: 12px;
+}
+
+.font-md {
+  font-size: 14px;
+}
+.text-main {
+  color: var(--main-color);
+}
+.bg-main {
+  background-color: var(--main-color) !important;
+}
+.bg-main-light {
+  background-color: var(--light-color) !important;
+}
+.btn-main {
+  background-color: var(--main-color);
+  padding: 7px 20px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  color: #fff;
+  transition: background-color 0.5s;
+}
+
+.btn-remove {
+  background-color: #fff;
+  padding: 6px 10px;
+  border: 1px solid #0000006d;
+  color: #0000006d;
+  transition: background-color 0.5s;
+  outline: none;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.fa-cc-visa {
+  color: rgb(31, 31, 162);
+  background-color: #fff;
+}
+
+.btnblue {
+  background-color: rgb(31, 31, 162);
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  color: #fff;
+  transition: background-color 0.5s;
+}
+.btnUpdate {
+  outline: none;
+  border: none;
+  &:hover {
+    color: var(--main-color);
+  }
+  &:disabled {
+    color: #0aad0a69;
+  }
+}
+
+.btn-main:disabled {
+  cursor: not-allowed;
+  background-color: #8bec8b;
+}
+.btn-main:disabled:hover {
+  background-color: #8bec8b;
+}
+.btn-main:hover {
+  background-color: #11bd11;
+}
+
+/* Navbar */
+.nav-link {
+  transition: unset !important;
+  font-weight: 600;
+}
+
+/* Products */
+.product {
+  position: relative;
+  transition: transform 0.5s ease-out, border-color 0.5s ease-out;
+  border: 1px solid transparent;
+  border-radius: 3px;
+
+  &:hover {
+    border-color: var(--border-color);
+    .cartNum {
+      transform: translateX(-120%);
+      opacity: 0;
+      visibility: hidden;
+    }
+    .addRemoveItem {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+  }
+
+  .btn-main,
+  .addRemoveItem {
+    position: absolute;
+    left: 0;
+    right: 0;
+    transition: transform 0.7s ease-in-out;
+  }
+
+  .btn-main {
+    bottom: 0%;
+    transform: translateY(120%);
+  }
+  .addRemoveItem {
+    bottom: 2%;
+    transform: translatex(-120%);
+  }
+
+  &:hover .btn-main,
+  .purchase-info:hover .addRemoveItem {
+    transform: translateY(0%);
+  }
+
+  .product-header {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .product-body {
+    h6 {
+      transition: color 0.5s;
+      &:hover {
+        color: var(--main-color);
+      }
+    }
+  }
+}
+
+/* Container Shadow */
+.boxShadow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 25px;
+}
+
+@media (min-width: 768px) {
+  .boxShadow {
+    padding-left: 80px;
+  }
+}
+
+/* Form Styles */
+input {
+  padding-left: 40px !important;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #28a745 !important;
+  box-shadow: 0 0 5px rgba(40, 167, 69, 0.5) !important;
+  transform: translateY(-2px);
+}
+
+span {
+  top: 60%;
+  transition: all 0.3s ease;
+}
+
+/* Animation */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeInLeft {
+  animation-name: fadeInLeft;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeInRight {
+  animation-name: fadeInRight;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}

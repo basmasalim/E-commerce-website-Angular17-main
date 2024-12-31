@@ -1,0 +1,15 @@
+section {
+  padding-top: 4rem !important;
+  min-height: 95vh;
+}
+
+.main-border {
+  border: 2px solid var(--main-color);
+}
+.mainCategory figure:hover img {
+  transform: scale(1.2);
+}
+
+img {
+  transition: all 0.7s;
+}

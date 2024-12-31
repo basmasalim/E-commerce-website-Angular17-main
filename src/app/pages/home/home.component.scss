@@ -1,0 +1,36 @@
+main {
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
+}
+
+.main-border {
+  border: 2px solid var(--border-color);
+}
+.mainCategory figure:hover .layer {
+  opacity: 1;
+}
+.layer {
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+:host {
+  --swiper-theme-color: var(--main-color);
+}
+swiper-slide img {
+  cursor: grabbing;
+}
+
+swiper-container::part(bullet-active) {
+  background-color: var(--main-color);
+  cursor: pointer;
+}
+swiper-container::part(bullet) {
+  background-color: #000;
+}
+.mainCategory swiper-container::part(pagination) {
+  margin-bottom: -7px;
+}
+swiper-container::part(button-next),
+swiper-container::part(button-prev) {
+  color: var(--main-color);
+}

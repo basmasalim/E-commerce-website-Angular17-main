@@ -1,0 +1,118 @@
+<section class="Checkout d-flex align-items-center my-5">
+  <div class="container boxShadow">
+    <div class="row gy-3 overflow-hidden">
+      <div class="Checkout-image col-lg-6 d-lg-block d-none">
+        <figure>
+          <img
+            src="./assets/images/pay.jpg"
+            alt="Checkout image"
+            class="w-75 fadeInRight mb-3"
+            style="margin-left: 60px"
+          />
+        </figure>
+      </div>
+      <div class="Checkout-form col-lg-6 fadeInLeft">
+        <h2 class="form-title fs-1 text-center">Checkout</h2>
+        <form
+          class="Checkout-form"
+          id="Checkout-form"
+          [formGroup]="order"
+          (ngSubmit)="orderSubmit()"
+        >
+          <!-- details -->
+          <div class="position-relative mb-2">
+            <label for="details" class="fs-6 fw-medium py-2 text-capitalize">
+              details:
+            </label>
+            <input
+              id="details"
+              type="details"
+              name="details"
+              class="form-control shadow-none focus-ring-dark"
+              placeholder="Details"
+              formControlName="details"
+            />
+            <span class="position-absolute z-3 start-0 ms-3">
+              <i class="fa-solid fa-info fa-1"></i>
+            </span>
+          </div>
+          @if (order.get('details')?.errors && order.get('details')?.touched) {
+          <div class="alert alert-danger">
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              details is required
+            </p>
+          </div>
+          }
+          <!-- phone -->
+
+          <div class="position-relative mb-2">
+            <label for="phone" class="fs-6 fw-medium py-2 text-capitalize"
+              >Phone:</label
+            >
+            <input
+              id="phone"
+              type="tel"
+              name="phone"
+              class="form-control shadow-none focus-ring-dark"
+              placeholder="phone"
+              formControlName="phone"
+            />
+            <span class="position-absolute z-3 start-0 ms-3">
+              <i class="fa-solid fa-phone"></i>
+            </span>
+          </div>
+          @if (order.get('phone')?.errors && order.get('phone')?.touched) {
+          <div class="alert alert-danger">
+            @if (order.get('phone')?.getError('required')) {
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              Phone is required
+            </p>
+            }@if(order.get('phone')?.getError('pattern')){
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              accept only egypt phone numbers
+            </p>
+            }
+          </div>
+          }
+          <!-- city -->
+          <div class="position-relative mb-2">
+            <label for="city" class="fs-6 fw-medium py-2 text-capitalize">
+              city:
+            </label>
+            <input
+              id="city"
+              type="city"
+              name="city"
+              class="form-control shadow-none focus-ring-dark"
+              placeholder="City"
+              formControlName="city"
+            />
+            <span class="position-absolute z-3 start-0 ms-3">
+              <i class="fa-solid fa-city fa-1"></i>
+            </span>
+          </div>
+          @if (order.get('city')?.errors && order.get('city')?.touched) {
+          <div class="alert alert-danger">
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              city is required
+            </p>
+          </div>
+          }
+
+          <!-- button -->
+          <div
+            class="d-flex justify-content-center align-items-center flex-column my-3"
+          >
+            <button class="btn-main" [disabled]="order.invalid || isLoading">
+              @if (isLoading) {
+              <i class="fa fa-spinner fa-spin"></i>
+              }@if (!isLoading) {
+              <span>checkout</span>
+              }
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

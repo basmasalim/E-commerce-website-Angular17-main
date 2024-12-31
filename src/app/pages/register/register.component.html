@@ -1,0 +1,218 @@
+<section class="register d-flex align-items-center">
+  <div class="container boxShadow">
+    <div class="register-content row gy-3 overflow-hidden">
+      <div class="register-form col-lg-6 fadeInRight">
+        <h2 class="form-title fs-1 text-center">Let's go!</h2>
+        <form
+          class="register-form"
+          id="register-form"
+          [formGroup]="registerForm"
+          (ngSubmit)="registerSubmit()"
+        >
+          <!-- Name -->
+          <div class="position-relative mb-2">
+            <label for="userName" class="fs-6 fw-medium py-2 text-capitalize"
+              >User Name:</label
+            >
+            <input
+              id="userName"
+              type="text"
+              name="userName"
+              class="form-control shadow-none focus-ring-dark"
+              placeholder="User Name"
+              formControlName="name"
+            />
+            <span class="position-absolute z-3 start-0 ms-3">
+              <i class="fa-regular fa-user"></i>
+            </span>
+          </div>
+          @if (registerForm.get('name')?.errors &&
+          registerForm.get('name')?.touched) {
+          <div class="alert alert-danger">
+            @if (registerForm.get('name')?.getError('required')) {
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              Name is required
+            </p>
+            }@if(registerForm.get('name')?.getError('minlength')){
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              Name Should be more than or equal 3 chars
+            </p>
+            }@if(registerForm.get('name')?.getError('maxlength')){
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              Name Should be less than or equal 20 chars
+            </p>
+            }
+          </div>
+          }
+          <!-- Email -->
+          <div class="position-relative mb-2">
+            <label for="email" class="fs-6 fw-medium py-2 text-capitalize"
+              >email:</label
+            >
+            <input
+              id="email"
+              type="email"
+              name="email"
+              class="form-control shadow-none focus-ring-dark"
+              placeholder="Email"
+              formControlName="email"
+            />
+            <span class="position-absolute z-3 start-0 ms-3">
+              <i class="fa-regular fa-envelope fa-1"></i>
+            </span>
+          </div>
+          @if (registerForm.get('email')?.errors &&
+          registerForm.get('email')?.touched) {
+          <div class="alert alert-danger">
+            @if (registerForm.get('email')?.getError('required')) {
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              Email is required
+            </p>
+            }@if(registerForm.get('email')?.getError('email')){
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              Enter Valid Email
+            </p>
+            }
+          </div>
+          }
+
+          <!-- Password -->
+          <div class="position-relative mb-2">
+            <label for="password" class="fs-6 fw-medium py-2 text-capitalize"
+              >password:</label
+            >
+            <input
+              id="password"
+              type="password"
+              name="password"
+              class="form-control shadow-none focus-ring-dark"
+              placeholder="Password"
+              formControlName="password"
+            />
+            <span class="position-absolute z-3 start-0 ms-3">
+              <i class="fa-solid fa-lock fa-1"></i>
+            </span>
+          </div>
+
+          @if (registerForm.get('password')?.errors &&
+          registerForm.get('password')?.touched) {
+          <div class="alert alert-danger">
+            @if (registerForm.get('password')?.getError('required')) {
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              Password is required
+            </p>
+            }@if(registerForm.get('password')?.getError('pattern')){
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              must be at least 6 chars
+            </p>
+            }
+          </div>
+          }
+          <!-- RePassword -->
+          <div class="position-relative mb-2">
+            <label for="repassword" class="fs-6 fw-medium py-2 text-capitalize"
+              >RePassword:</label
+            >
+            <input
+              id="repassword"
+              type="password"
+              name="repassword"
+              class="form-control shadow-none focus-ring-dark"
+              placeholder="Repassword"
+              formControlName="rePassword"
+            />
+            <span class="position-absolute z-3 start-0 ms-3">
+              <i class="fa-solid fa-lock fa-1"></i>
+            </span>
+          </div>
+          @if (registerForm.getError('misMatch') &&
+          registerForm.get('rePassword')?.touched) {
+          <div class="alert alert-danger">
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              Password confirmation is incorrect
+            </p>
+          </div>
+          }
+          <!-- Phone -->
+          <div class="position-relative mb-2">
+            <label for="phone" class="fs-6 fw-medium py-2 text-capitalize"
+              >Phone:</label
+            >
+            <input
+              id="phone"
+              type="tel"
+              name="phone"
+              class="form-control shadow-none focus-ring-dark"
+              placeholder="phone"
+              formControlName="phone"
+            />
+            <span class="position-absolute z-3 start-0 ms-3">
+              <i class="fa-solid fa-phone"></i>
+            </span>
+          </div>
+          @if (registerForm.get('phone')?.errors &&
+          registerForm.get('phone')?.touched) {
+          <div class="alert alert-danger">
+            @if (registerForm.get('phone')?.getError('required')) {
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              Phone is required
+            </p>
+            }@if(registerForm.get('phone')?.getError('pattern')){
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              accept only egypt phone numbers
+            </p>
+            }
+          </div>
+          }
+          <!--msgError  -->
+          @if (msgError) {
+          <div class="alert alert-danger mt-3 mb-2">
+            <p class="font-md fw-semibold p-0 m-0 text-capitalize text-center">
+              {{ msgError }}
+            </p>
+          </div>
+          }
+          <!-- success -->
+          @if (msgSuccess) {
+          <div class="alert alert-success">
+            <p class="font-md fw-semibold p-0 m-0 text-capitalize text-center">
+              success
+            </p>
+          </div>
+          }
+          <!-- btn -->
+          <div
+            class="d-flex justify-content-center align-items-center flex-column my-3"
+          >
+            <button
+              class="btn-main"
+              type="submit"
+              [disabled]="registerForm.invalid || isLoading"
+            >
+              @if (isLoading) {
+              <i class="fa fa-spinner fa-spin"></i>
+              }@if (!isLoading) {
+              <span>Register</span>
+              }
+            </button>
+            <p class="my-3">
+              Already Have an account?
+              <a class="text-success text-capitalize" routerLink="/login"
+                >login</a
+              >
+            </p>
+          </div>
+        </form>
+      </div>
+      <div class="register-image col-lg-6 d-lg-block d-none">
+        <figure class="ps-5">
+          <img
+            src="assets/images/sign-image.png"
+            alt="sing up image"
+            class="w-75 ms-auto fadeInLeft"
+          />
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>

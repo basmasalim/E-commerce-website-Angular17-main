@@ -1,0 +1,148 @@
+@if (cartData!.products!.length > 0) {
+<main class="container">
+  <div class="row g-5 justify-content-between">
+    <div class="col-lg-8 col-12 boxShadow bg-light bg-opacity-50">
+      <section>
+        <h2 class="fw-medium fs-3">
+          Cart @if (cartData!.products) {
+          <span class="fs-6 fw-lighter text-black-50"
+            >(
+            <span>{{ cartData!.products!.length }}</span>
+            )</span
+          >
+          }
+        </h2>
+        @for (item of cartData.products; track item._id) {
+        <div class="row cart g-4 py-3">
+          <!-- img -->
+          <div class="col-md-2 cr">
+            <div>
+              <img
+                [src]="item.product.imageCover"
+                [alt]="item.product.title"
+                class="w-100"
+                [routerLink]="['/details', item.product._id]"
+              />
+            </div>
+          </div>
+          <!-- info -->
+          <div class="col-md-10">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h4
+                  class="fs-6 cr"
+                  [routerLink]="['/details', item.product._id]"
+                >
+                  {{ item.product.title }}
+                </h4>
+                <p class="text-black-50 font-md">
+                  Sold by:
+                  <span class="text-black">{{ item.product.brand.name }}</span>
+                </p>
+                <button
+                  class="btn-remove rounded-1"
+                  (click)="removeItem(item.product._id)"
+                >
+                  @if (item.isloading) {
+                  <i class="fa fa-spinner fa-spin"></i>
+                  }@if (!item.isloading) {<i class="fa-solid fa-trash-can"></i>
+                  Remove }
+                </button>
+              </div>
+              <div>
+                <p class="fs-5 fw-medium my-1 text-center">
+                  <span class="font-sm fw-normal">EGP</span>{{ item.price }}
+                </p>
+                <div class="d-flex align-items-cente">
+                  <button
+                    #btnAdd
+                    class="text-main btn btnUpdate"
+                    (click)="
+                      updateCount(
+                        item.product._id,
+                        item.count + 1,
+                        btnAdd,
+                        btnRemove
+                      )
+                    "
+                  >
+                    <i class="fa-solid fa-square-plus fa-2x cr"></i>
+                  </button>
+
+                  <span class="mt-1">
+                    @if (item.isloadingCount) {
+                    <i class="fa fa-spinner fa-spin fa-1x mt-2"></i>
+                    }@if (!item.isloadingCount){
+                    <span class="fs-5 spin">{{ item.count }}</span>
+                    }</span
+                  >
+
+                  <button
+                    #btnRemove
+                    class="text-main btn btnUpdate"
+                    [disabled]="item.count === 1"
+                    (click)="
+                      updateCount(
+                        item.product._id,
+                        item.count - 1,
+                        btnAdd,
+                        btnRemove
+                      )
+                    "
+                  >
+                    <i class="fa-solid fa-square-minus fa-2x cr"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        }
+      </section>
+    </div>
+    <div
+      class="aside col-lg-3 col-12 boxShadow border border-opacity-75 border-1 offset-lg-1 offset-0 bg-light bg-opacity-50"
+    >
+      <aside>
+        <h6 class="fw-medium fs-6 fw-semibold">CART SUMMARY</h6>
+        <div class="Subtotal d-flex justify-content-between align-items-center">
+          <span>Subtotal</span>
+          <span class="fs-5 fw-medium"
+            ><span class="font-sm">EGP</span>
+            {{ cartData.totalCartPrice }}</span
+          >
+        </div>
+        <div class="mt-3 row justify-content-between align-items-center g-2">
+          <div class="col-xl-6">
+            <button
+              class="cr text-capitalize py-1 btnwhite me-xl-1 font-md w-100"
+              [routerLink]="['/payment', cartData._id]"
+              [queryParams]="{ paymentType: 'cashOrder' }"
+            >
+              cash order
+              <img
+                src="./assets/images/cashorder.jpg"
+                alt="cashorder"
+                width="35"
+              />
+            </button>
+          </div>
+          <div class="col-xl-6">
+            <button
+              class="cr font-md btnblue text-capitalize py-1 w-100"
+              [routerLink]="['/payment', cartData._id]"
+              [queryParams]="{ paymentType: 'onlineOrder' }"
+            >
+              online order
+              <img src="./assets/images/visa.svg" alt="visa" width="25" />
+            </button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+}@else {
+<app-empty-page></app-empty-page>
+}

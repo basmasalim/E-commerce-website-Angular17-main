@@ -1,0 +1,126 @@
+<div class="row g-3">
+  @for (product of productList; track product._id) {
+  <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+    <figure class="product p-3">
+      <div class="overflow-hidden position-relative cr">
+        <img
+          [src]="product.imageCover"
+          [alt]="product.title"
+          class="w-100"
+          [routerLink]="['/details', product._id]"
+        />
+        <!--***** Add to cart ***** -->
+        <div class="purchase-info">
+          @for (item of cartData.products; track item._id) { @if
+          (item.product._id === product._id) {
+
+          <div
+            class="addRemoveItem d-flex align-items-center justify-content-between bg-main p-0 rounded-2"
+          >
+            <button
+              #btnAdd
+              class="btn border-0 pe-1 py-0"
+              (click)="
+                updateCount(item.product._id, item.count + 1, btnAdd, btnRemove)
+              "
+            >
+              <i class="fa-solid fa-plus fa-1x cr text-white p-0"></i>
+            </button>
+            <span class="mt-1 mx-1">
+              @if (item.isloadingCount) {
+              <i class="fa fa-spinner fa-spin fa-1x text-white"></i>
+              }@if (!item.isloadingCount){
+              <span class="fs-6 spin text-white mx-4">{{ item.count }}</span>
+              }</span
+            >
+            <button
+              #btnRemove
+              class="btn border-0 ps-0 py-0"
+              (click)="
+                updateCount(item.product._id, item.count - 1, btnAdd, btnRemove)
+              "
+            >
+              <i class="fa-solid fa-minus fa-1x cr text-white p-0"></i>
+            </button>
+          </div>
+          <!-- Increment and decrement buttons -->
+
+          <div class="position-absolute cartNum">
+            <div class="position-relative bg-main rounded-2 py-1 px-2">
+              <i class="fa-solid fa-cart-shopping fa-lg text-white"></i>
+              <span class="badNum fw-bold position-absolute text-main">{{
+                item.count
+              }}</span>
+            </div>
+          </div>
+
+          } } @if (!isProductInCart(product!._id)) {
+          <!-- Add to Cart button -->
+          <button
+            class="btn-main text-uppercase w-100 fw-semibold font-sm"
+            type="button"
+            (click)="addCart(product._id, btnRemoveAdd)"
+            #btnRemoveAdd
+          >
+            <i class="fa-solid fa-cart-shopping"></i>
+            Add to cart
+          </button>
+          }
+        </div>
+        <!--*********************** -->
+      </div>
+      <figcaption>
+        <div
+          class="product-header d-flex justify-content-between align-items-center py-2"
+        >
+          <span class="font-md">{{ stockStatuses[$index] }}</span>
+          <span>
+            @if (!wishlistData.includes(product._id)) {
+            <i (click)="addFav(product._id)" class="fa-regular fa-heart cr"></i>
+            } @if(wishlistData.includes(product._id)) {
+            <i
+              (click)="removeFav(product._id)"
+              class="fa-solid fa-heart cr text-main"
+            ></i>
+            }
+          </span>
+        </div>
+        <div class="product-body pt-3">
+          <h6
+            class="text-uppercase cr"
+            [routerLink]="['/details', product._id]"
+          >
+            {{ product.title.split(" ", 2).join(" ") }}
+          </h6>
+          <span class="text-muted font-sm">{{ product.category.name }}</span>
+
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="font-md">EGP {{ product.price }}</span>
+
+            <div>
+              <!-- Full stars -->
+              @for (star of [1,2,3,4,5].slice(0, product.ratingsAverage); track
+              $index) {
+              <span>
+                <i class="fas fa-star rating-color fa-2xs"></i>
+              </span>
+              }
+              <!-- Half star -->
+              @if (product.ratingsAverage % 1 !== 0) {
+              <i class="fa-solid fa-star-half-stroke rating-color fa-2xs"></i>
+              }
+              <!-- Empty stars -->
+              @for (star of [1,2,3,4,5].slice(0, 5 - product.ratingsAverage);
+              track $index) {
+              <span>
+                <i class="fa-regular fa-star rating-color fa-2xs"></i>
+              </span>
+              }
+            </div>
+          </div>
+        </div>
+      </figcaption>
+    </figure>
+  </div>
+  }
+</div>

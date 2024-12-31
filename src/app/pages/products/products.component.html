@@ -1,0 +1,34 @@
+<section class="container mb-5">
+  <nav>
+    <div class="row justify-content-between">
+      <div class="col-lg-6 order-lg-0 order-1 m-lg-0 mt-3">
+        <ul
+          #categories
+          class="switcher overflow-x-hidden d-flex list-unstyled p-0"
+          (click)="filterCategory((selectedCategoryName = $event.target))"
+        >
+          <li class="active" (click)="selectedCategoryName = ''">All</li>
+          <li (click)="selectedCategoryName = 'woman'">Women's Fashion</li>
+          <li (click)="selectedCategoryName = 'men'">Men's Fashion</li>
+          <li (click)="selectedCategoryName = 'Electronics'">Electronics</li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <input
+          type="search"
+          name="search"
+          id="search"
+          class="form-control"
+          placeholder="Search by Name .."
+          [(ngModel)]="searchInput"
+        />
+      </div>
+    </div>
+  </nav>
+  <app-main-products
+    [productList]="
+      productList | filterCategory : searchInput : selectedCategoryName
+    "
+    [stockStatuses]="StockStatusList"
+  ></app-main-products>
+</section>

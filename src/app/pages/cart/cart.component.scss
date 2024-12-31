@@ -1,0 +1,49 @@
+main {
+  padding-block: 7rem;
+  @media (max-width: 1000px) {
+    overflow-x: hidden !important;
+  }
+  .boxShadow {
+    padding: 23px;
+    @media (max-width: 600px) {
+      max-width: 400px;
+      margin-inline: auto;
+    }
+    @media (max-width: 470px) {
+      max-width: 300px;
+      margin-inline: auto;
+    }
+  }
+}
+
+h2 {
+  letter-spacing: 2px;
+}
+.cart {
+  border-bottom: 1px solid #0000000f;
+}
+.cart:last-child {
+  border-bottom: none !important;
+}
+.aside {
+  height: fit-content;
+}
+h4 {
+  transition: all 0.5s;
+  &:hover {
+    color: var(--main-color);
+  }
+}
+
+.Subtotal {
+  border-top: 1px solid #0000000f;
+  padding-block: 7px;
+}
+
+.btnwhite {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  color: var(--main-color);
+  transition: background-color 0.5s;
+}

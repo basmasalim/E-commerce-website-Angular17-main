@@ -1,0 +1,10 @@
+section {
+  padding-top: 4rem !important;
+}
+
+/* Portrait tablets and small desktops */
+@media (max-width: 991px) {
+  img {
+    width: 70% !important;
+  }
+}

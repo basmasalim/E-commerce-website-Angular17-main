@@ -1,0 +1,39 @@
+<!-- specific-category.component.html -->
+@if (specificBrands.image) {
+<section class="container px-4 rounded-5 boxShadow">
+  <div class="row">
+    <div class="col-xl-2 col-lg-3">
+      <figure>
+        <img
+          class="rounded-5"
+          [src]="specificBrands.image"
+          [alt]="specificBrands.name"
+          width="180"
+        />
+      </figure>
+    </div>
+    <div class="col-xl-10 col-lg-9">
+      <div class="info-categ d-flex flex-column justify-content-center h-100">
+        <div class="head">
+          <h1 class="text-capitalize fw-bold fs-5">Category Name:</h1>
+          <h3 class="text-capitalize mb-0 fw-medium text-main fs-6">
+            {{ specificBrands.name }}
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  @if ((productList | filterBrands : searchInput : specificBrands.name).length
+  >0){
+  <app-main-products
+    [productList]="
+      productList | filterBrands : searchInput : specificBrands.name
+    "
+    [stockStatuses]="StockStatusList"
+  ></app-main-products>
+  }@else {
+  <app-empty-page></app-empty-page>
+  }
+</section>
+}

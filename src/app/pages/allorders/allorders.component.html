@@ -1,0 +1,100 @@
+<section class="container mt-5">
+  <h1 class="text-capitalize text-center text-main fw-bold h2">
+    all your orders
+  </h1>
+  <div class="row g-2">
+    <div class="inner allorders rounded-3 p-5">
+      <div class="row gy-4 align-items-start justify-content-between">
+        @for (order of allUserOrders; track $index) {
+        <div class="col-lg-8">
+          <div
+            class="row mb-0 mb-lg-4 bg-light px-5 py-4 rounded-3 justify-content-center"
+          >
+            @for (item of order?.cartItems; track $index) {
+            <div class="col-xl-3 col-lg-6 g-3">
+              <figure
+                class="product p-3 cr d-lg-block d-flex"
+                [routerLink]="['/details', item.product._id]"
+              >
+                <div class="w-100 mb-2">
+                  <img
+                    class="w-100"
+                    [src]="item.product.imageCover"
+                    [alt]="item.product.title"
+                  />
+                </div>
+                <figcaption>
+                  <h2 class="text-capitalize text-main font-md">
+                    order id: <span class="text-muted">#{{ order?.id }}</span>
+                  </h2>
+                  <div class="info-order">
+                    <div class="isDelivered">
+                      <h4 class="text-capitalize text-muted font-md">
+                        isDelivered: @if (order?.isDelivered) {
+                        <i class="fa-solid fa-check text-main"></i>
+                        } @else {
+                        <i class="fa-solid fa-circle-xmark text-danger"></i>
+                        }
+                      </h4>
+                    </div>
+                    <div class="isPaid">
+                      <h4 class="text-capitalize text-muted font-md">
+                        isPaid: @if (order?.isPaid) {
+                        <i class="fa-solid fa-check text-main"></i>
+                        }@else {
+                        <i class="fa-solid fa-circle-xmark text-danger"></i>
+                        }
+                      </h4>
+                    </div>
+                    <h4 class="text-capitalize text-muted font-md">
+                      date: {{ order?.paidAt | date }}
+                    </h4>
+                    <div class="payment text-muted text-capitalize font-md">
+                      <h4 class="font-md">
+                        payment Type: @if (order?.paymentMethodType === 'card')
+                        {
+                        <i class="fa-brands fa-cc-visa fa-xl"></i>
+                        }@else if (order?.paymentMethodType === 'cash') {
+                        <i class="fa-solid fa-wallet fa-xl text-main"></i>
+                        }
+                      </h4>
+                    </div>
+                  </div>
+                </figcaption>
+              </figure>
+            </div>
+
+            }
+          </div>
+        </div>
+        <div
+          class="col-lg-3 bg-light rounded-3 offset-lg-1 mb-lg-0 mb-5 px-5 py-4"
+        >
+          <h4 class="text-capitalize font-md">
+            shipping Price:
+            <span class="text-muted">{{ order?.shippingPrice }}</span>
+          </h4>
+          <h4 class="text-capitalize font-md">
+            tax Price: <span class="text-muted">{{ order?.taxPrice }}</span>
+          </h4>
+          <hr />
+          <h4 class="text-capitalize font-md">
+            total Order Price:
+            <span class="text-muted">EGP {{ order?.totalOrderPrice }}</span>
+          </h4>
+          <div class="mt-3 w-100 btn-main">
+            <a
+              class="text-white cr fw-bold text-capitalize font-md ps-3"
+              [routerLink]="['/specifcOrder', order?._id]"
+            >
+              <i class="fa-solid fa-angles-right"></i>
+              show order? details
+            </a>
+          </div>
+        </div>
+
+        }
+      </div>
+    </div>
+  </div>
+</section>

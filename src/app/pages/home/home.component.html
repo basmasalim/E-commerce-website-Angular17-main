@@ -1,0 +1,71 @@
+<main>
+  <section>
+    <swiper-container
+      speed="700"
+      autoplay="true"
+      loop="true"
+      navigation="true"
+      lazy="true"
+      pagination-dynamic-bullets="true"
+    >
+      @for (slide of mainSlider; track $index) {
+      <swiper-slide>
+        <img
+          [src]="slide"
+          alt="image slide"
+          class="w-100 d-block"
+          height="500"
+          loading="lazy"
+        />
+      </swiper-slide>
+      }
+    </swiper-container>
+  </section>
+
+  <section class="my-4 container mainCategory">
+    <swiper-container
+      speed="500"
+      autoplay="true"
+      loop="true"
+      pagination-dynamic-bullets="true"
+      lazy="true"
+      [breakpoints]="breakpoints"
+    >
+      @for (category of categoryList; track $index) {
+      <swiper-slide>
+        <figure
+          class="main-border mx-1 cr position-relative overflow-hidden"
+          [routerLink]="['/specificCategory', category._id]"
+        >
+          <img
+            [src]="category.image"
+            [alt]="category.name"
+            [title]="category.name"
+            loading="lazy"
+            height="200"
+            width="150"
+          />
+          <figcaption>
+            <div
+              class="layer position-absolute top-0 start-0 bg-body-secondary h-100 w-100 bg-opacity-75 d-flex justify-content-center align-items-center"
+            >
+              <span class="font-sm text-main text-center"
+                >{{ category.name }}
+                <i class="fa-solid fa-arrow-right"></i>
+              </span>
+            </div>
+          </figcaption>
+        </figure>
+      </swiper-slide>
+      }
+    </swiper-container>
+  </section>
+
+  <section class="container my-1">
+    <h2 class="text-uppercase">Best Seller</h2>
+    <app-main-products
+      [productList]="productList.slice(0, 12).reverse()"
+      [stockStatuses]="StockStatusList"
+    ></app-main-products>
+  </section>
+</main>

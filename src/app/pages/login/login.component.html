@@ -1,0 +1,117 @@
+<section class="login d-flex align-items-center">
+  <div class="container boxShadow">
+    <div class="row gy-3 overflow-hidden">
+      <div class="login-image col-lg-6 d-lg-block d-none">
+        <figure>
+          <img
+            src="assets/images/sign-image.png"
+            alt="sign up image"
+            class="w-75 fadeInRight"
+            style="margin-left: 60px"
+          />
+        </figure>
+      </div>
+      <div class="login-form col-lg-6 fadeInLeft">
+        <h2 class="form-title fs-1 text-center">Welcome back!</h2>
+        <form
+          class="login-form"
+          id="login-form"
+          [formGroup]="loginForm"
+          (ngSubmit)="loginSubmit()"
+        >
+          <!-- Email -->
+          <div class="position-relative mb-2">
+            <label for="email" class="fs-6 fw-medium py-2 text-capitalize">
+              Email:
+            </label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              class="form-control shadow-none focus-ring-dark"
+              placeholder="Email"
+              formControlName="email"
+            />
+            <span class="position-absolute z-3 start-0 ms-3">
+              <i class="fa-regular fa-envelope fa-1"></i>
+            </span>
+          </div>
+          @if (loginForm.get('email')?.errors &&
+          loginForm.get('email')?.touched) {
+          <div class="alert alert-danger">
+            @if (loginForm.get('email')?.getError('required')) {
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              Email is required
+            </p>
+            }@if(loginForm.get('email')?.getError('email')){
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              Enter Valid Email
+            </p>
+            }
+          </div>
+          }
+          <div class="position-relative mb-2">
+            <label for="password" class="fs-6 fw-medium py-2 text-capitalize">
+              Password:
+            </label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              class="form-control shadow-none focus-ring-dark"
+              placeholder="Password"
+              formControlName="password"
+            />
+            <span class="position-absolute z-3 start-0 ms-3">
+              <i class="fa-solid fa-lock"></i>
+            </span>
+          </div>
+          @if (loginForm.get('password')?.errors &&
+          loginForm.get('password')?.touched) {
+          <div class="alert alert-danger">
+            @if (loginForm.get('password')?.getError('required')) {
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              Password is required
+            </p>
+            }@if(loginForm.get('password')?.getError('pattern')){
+            <p class="font-sm fw-semibold p-0 m-0 text-capitalize">
+              must be at least 6 chars
+            </p>
+            }
+          </div>
+          }
+
+          <!-- ForgotPassword -->
+          <div class="d-block ms-auto text-end">
+            <a
+              routerLink="/verifyEmail"
+              class="text-success font-md fw-semibold"
+              >Forgot Password?</a
+            >
+          </div>
+
+          <div
+            class="d-flex justify-content-center align-items-center flex-column my-3"
+          >
+            <button
+              class="btn-main"
+              [disabled]="loginForm.invalid || isLoading"
+            >
+              @if (isLoading) {
+              <i class="fa fa-spinner fa-spin"></i>
+              }@if (!isLoading) {
+              <span>Login</span>
+              }
+            </button>
+            <p class="my-3">
+              Don't have an account?
+              <a class="text-success text-capitalize" routerLink="/register"
+                >Register</a
+              >
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
